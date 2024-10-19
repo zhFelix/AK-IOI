@@ -1,5 +1,6 @@
 # AK-IOI
 AK-IOI
+你是第[![Page Views Count](https://badges.toozhao.com/badges/01JAHWC5PMKA65KS1M616WK5JK/blue.svg)](https://badges.toozhao.com/stats/01JAHWC5PMKA65KS1M616WK5JK "Get your own page views count badge on badges.toozhao.com")看到我这个项目的人。
 # 日志
 2024/10/3 10:42 编写了一个程序UDLR。 \
 2024/10/4 14:05 受此程序启发改编为OIer的2048。 \
