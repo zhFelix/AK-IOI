@@ -410,7 +410,9 @@ int main() {
             cin>>op;
             if(op=="yes") {
                 save(gameover);
+	            cout<<hints[x][8]<<endl;
             }
+            pause();
             return 0;
         } else if(c==w) {
             up();
