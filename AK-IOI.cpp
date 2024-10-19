@@ -39,7 +39,9 @@ vector<string> lg[5]={{"                               日志                     
                        "2024/10/11 22:06 增加帮助信息。", 
                        "2024/10/19 11:38 针对Windows用户，增加输入时不用按回车功能。", 
                        "2024/10/19 11:50 更改日志、帮助信息等输出方式。", 
-                       "2024/10/19 11:55 修复什么也没做时强制退出不会保存的bug。"
+                       "2024/10/19 11:55 修复什么也没做时强制退出不会保存的bug。", 
+                       "2024/10/19 15:35 日志增加德语。", 
+                       "2024/10/19 15:45 提示语增加德语。"
                       },
                       {"                                         log                                         ", 
                        "-------------------------------------------------------------------------------------", 
@@ -66,19 +68,47 @@ vector<string> lg[5]={{"                               日志                     
                        "2024/10/11 22:06 Add help information.", 
                        "2024/10/19 11:38 For Windows users, add the option to input without pressing Enter.", 
                        "2024/10/19 11:50 Change the output methods of logs, help information, etc.", 
-                       "2024/10/19 11:55 Fix bug where forced exit does not save when nothing is done."
-                      }};
-string hints[5][110]={{"请问你想读取进度吗(yes/no):", 
+                       "2024/10/19 11:55 Fix bug where forced exit does not save when nothing is done.", 
+                       "2024/10/19 15:35 Add German to the log.", 
+                       "2024/10/19 15:45 Add German as a prompt."
+                      }, 
+					  {"                                                           Journal                                                                    ", 
+					   "--------------------------------------------------------------------------------------------------------------------------------------", 
+					   "2024/10/3 10:42 Entwickelt ein Programm UDLR.", 
+					   "2024/10/3 14:05 Inspiriert von diesem Programm wurde es in OIers 2048 adaptiert.", 
+					   "2024/10/4 15:07 Die Grundfunktionen wurden geschrieben.", 
+					   "2024/10/4 18:47 Hinzugefygt die Funktion der zuaulligen Generierung von CE.", 
+					   "2024/10/5 13:11 Historische Aufzeichnungen wurden hinzugefygt.", 
+					   "2024/10/5 13:27 Dieses Protokoll wurde hinzugefygt.", 
+					   "2024/10/5 14:32 Englisch zum Protokoll hinzugefygt.", 
+					   "2024/10/5 15:32 Logik hinzugefygt, um Gameover zu bestimmen.", 
+					   "2024/10/5 15:51 Die Funktion zum Lvorschen von Karten wurde hinzugefygt.", 
+					   "2024/10/5 16:11 Bug behoben, bei dem es nach dem Lvorschen keine Blvorcke gibt.", 
+					   "2024/10/7 11:37 Fygen Sie die Bedeutung jedes Staates hinzu.", 
+					   "2024/10/7 16:45 Ehndern Sie den Eingabetyp fyr die Sprache.", 
+					   "2024/10/7 16:48 Ehndern Sie den Vorgang, wenn Ausgabeprotokolle ausgegeben werden.", 
+					   "2024/10/7 16:58 Hinzugefygt die Funktion des Speichern beim erzwungenen Beenden.", 
+					   "2024/10/7 17:12 Markieren Sie die abgekyrzten Buchstaben in der Bedeutung jedes Staates.", 
+					   "2024/10/11 21:35 Hinzugefygt die Funktion des Speichern wauhrend des Spiels.", 
+					   "2024/10/11 22:06 Hilfeinformationen hinzufygen.", 
+					   "2024/10/19 11:38 Fyr Windows-Benutzer kvornnen Sie die Option zur Eingabe hinzufygen, ohne die Eingabetaste zu drycken.", 
+					   "2024/10/19 11:50 Ehndern Sie die Ausgabemethoden von Protokollen, Hilfeinformationen usw.", 
+					   "2024/10/19 11:55 Fehler behoben, bei dem erzwungene Beendigung nicht gespeichert wird, wenn nichts getan wird.", 
+					   "2024/10/19 15:35 Deutsch zum Protokoll hinzufygen.", 
+					   "2024/10/19 15:45 Aufforderung, deutsche Sprache hinzuzufygen."
+					  }};
+string hints[5][110]={{"请问你想读取进度吗(是/否):", 
                        "请按任意键继续...", 
                        "请输入你的操作系统(1.Windows 2.Mac 3.Linux):", 
                        "请用 w, a, s, d 键游玩, q 键退出。", 
                        "请用方向键游玩, ESC 键退出。", 
-                       "请问是否要保存进度(yes/no):", 
-                       "请问你确定要清空地图吗(yes/no):", 
+                       "请问是否要保存进度(是/否):", 
+                       "请问你确定要清空地图吗(是/否):", 
                        "清空完毕。", 
                        "保存完毕。", 
                        "游戏结束", 
-                       "切换完毕，当前语言:中文"
+                       "切换完毕，当前语言:中文", 
+                       "以北京时间为准。"
                       }, 
                       {"May I ask if you would like to read the progress (yes/no):", 
                        "Please press any key to continue...", 
@@ -90,8 +120,22 @@ string hints[5][110]={{"请问你想读取进度吗(yes/no):",
                        "Clearing completed.", 
                        "Save completed.", 
                        "Game Over", 
-                       "Switching completed, current language:English"
-                      }};
+                       "Switching completed, current language:English", 
+                       "According to Beijing time."
+                      }, 
+					  {"Darf ich Sie fragen, ob Sie den Fortschritt lesen mvorchten (ja/nein):", 
+					   "Bitte drycken Sie eine beliebige Taste, um fortzufahren...", 
+					   "Bitte geben Sie Ihr Betriebssystem ein (1. Windows 2. Mac 3. Linux):", 
+					   "Bitte verwenden Sie die w-, a-, s- und d-Tasten zum Spielen und die q-Taste zum Beenden.", 
+					   "Bitte verwenden Sie die Richtungstasten zum Spielen und die ESC-Taste zum Beenden.", 
+					   "Darf ich fragen, ob Sie den Fortschritt speichern mvorchten (ja/nein):", 
+					   "Bist du sicher, dass du die Karte lvorschen willstvor (ja/nein):", 
+					   "Clearing abgeschlossen.", 
+					   "Speichern abgeschlossen.", 
+					   "Spiel vorbei", 
+					   "Umschalten abgeschlossen, aktuelle Sprache:Deutsch", 
+					   "Nach Pekinger Zeit."
+					  }};
 vector<string> help[5]={{"                           帮助                           ", 
 					     "----------------------------------------------------------", 
 					     "Linux系统:", 
@@ -141,6 +185,9 @@ vector<string> help[5]={{"                           帮助                       
 					  "    language        Switch language", 
 					  "    help            Display this help information"
 					 }};
+string yn[5][2]={{"是", "否"}, 
+				 {"yes", "no"}, 
+				 {"ja", "nein"}};
 void init() {
     map<long long, int> mp;
     mp[1]=1;
@@ -200,6 +247,7 @@ void init() {
     means.insert(pair<int, string>(65536, "65536 AK  \033[1mAK\033[0m"));
     lang.insert(pair<string, int>("zh", 0));
     lang.insert(pair<string, int>("en", 1));
+    lang.insert(pair<string, int>("de", 2));
 }
 void prt() {
     system(cl);
@@ -337,7 +385,7 @@ void mean() {
 }
 void set_lang() {
 	string language;
-    cout<<"请输入你的语言/Please enter your language(zh/en):";
+    cout<<"请输入你的语言/Please enter your language/Bitte geben Sie Ihre Sprache ein(zh/en/de):";
     cin>>language;
     x=lang[language];
 }
@@ -353,7 +401,7 @@ int main() {
         if(!gameover) {
             cout<<hints[x][0];
             cin>>op;
-            if(op=="yes") {
+            if(op==yn[x][0]) {
                 for(int i = 1;i<=n;i++) {
                     for(int j = 1;j<=n;j++) {
                         fin>>a[i][j];
@@ -408,7 +456,7 @@ int main() {
             string op;
             cout<<hints[x][5];
             cin>>op;
-            if(op=="yes") {
+            if(op==yn[x][0]) {
                 save(gameover);
 	            cout<<hints[x][8]<<endl;
             }
@@ -435,6 +483,7 @@ int main() {
         	cin>>h;
         	if(h=="log") {
 	        	system(cl);
+	        	cout<<hints[x][11]<<endl;
 	            for(int i = 0;i<lg[x].size();i++) {
 	                cout<<lg[x][i]<<endl;
 	            }
@@ -444,7 +493,7 @@ int main() {
 	            string op;
 	            cout<<hints[x][6];
 	            cin>>op;
-	            if(op=="yes") {
+	            if(op==yn[x][0]) {
 	                for(int i = 1;i<=n;i++) {
 	                    for(int j = 1;j<=n;j++) {
 	                        ::a[i][j]=0;
