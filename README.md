@@ -1,5 +1,6 @@
 # AK-IOI
 AK-IOI
+你是第[![Page Views Count](https://badges.toozhao.com/badges/01JAHWC5PMKA65KS1M616WK5JK/blue.svg)](https://badges.toozhao.com/stats/01JAHWC5PMKA65KS1M616WK5JK "Get your own page views count badge on badges.toozhao.com")看到我这个项目的人。
 # 日志
 2024/10/3 10:42 编写了一个程序UDLR。 \
 2024/10/4 14:05 受此程序启发改编为OIer的2048。 \
@@ -24,4 +25,6 @@ AK-IOI
 2024/10/11 22:06 增加帮助信息。\
 2024/10/19 11:38 针对Windows用户，增加输入时不用按回车功能。\
 2024/10/19 11:50 更改日志、帮助信息等输出方式。\
-2024/10/19 11:55 修复什么也没做时强制退出不会保存的bug。
+2024/10/19 11:55 修复什么也没做时强制退出不会保存的bug。\
+2024/10/19 15:35 日志增加德语。\
+2024/10/19 15:45 提示语增加德语。
