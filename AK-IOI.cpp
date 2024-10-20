@@ -3,7 +3,7 @@
 using namespace std;
 int a[110][110], n, x;
 map<long long, int> fib;
-bool vis[110][110];
+bool vis[110][110], gameover;
 map<int, string> color, status, means;
 map<string, int> lang;
 char cl[10];
@@ -41,10 +41,13 @@ vector<string> lg[5]={{"                               日志                     
                        "2024/10/19 11:50 更改日志、帮助信息等输出方式。", 
                        "2024/10/19 11:55 修复什么也没做时强制退出不会保存的bug。", 
                        "2024/10/19 15:35 日志增加德语。", 
-                       "2024/10/19 15:45 提示语增加德语。"
+                       "2024/10/19 15:45 提示语增加德语。", 
+                       "2024/10/19 19:09 更改输入操作系统改为自动判断，防止输入错误。", 
+                       "2024/10/19 19:28 当输入o后输入其他指令，会让用户重新输入。", 
+                       "2024/10/20 17:39 帮助信息增加德语。"
                       },
-                      {"                                         log                                         ", 
-                       "-------------------------------------------------------------------------------------", 
+                      {"                                                    log                                               ", 
+                       "------------------------------------------------------------------------------------------------------", 
                        "2024/10/3 10:42 Developed a program UDLR.", 
                        "2024/10/3 14:05 Inspired by this program, it was adapted into OIer's 2048.", 
                        "2024/10/4 15:07 The basic functions have been written.", 
@@ -70,7 +73,10 @@ vector<string> lg[5]={{"                               日志                     
                        "2024/10/19 11:50 Change the output methods of logs, help information, etc.", 
                        "2024/10/19 11:55 Fix bug where forced exit does not save when nothing is done.", 
                        "2024/10/19 15:35 Add German to the log.", 
-                       "2024/10/19 15:45 Add German as a prompt."
+                       "2024/10/19 15:45 Add German as a prompt.", 
+                       "2024/10/19 19:09 Change input operating system to automatic judgment to prevent input errors.", 
+                       "2024/10/19 19:28 When entering 'o' followed by other commands, it will prompt the user to re-enter.", 
+                       "2024/10/20 17:39 Help information added in German."
                       }, 
 					  {"                                                           Journal                                                                    ", 
 					   "--------------------------------------------------------------------------------------------------------------------------------------", 
@@ -95,7 +101,10 @@ vector<string> lg[5]={{"                               日志                     
 					   "2024/10/19 11:50 Ehndern Sie die Ausgabemethoden von Protokollen, Hilfeinformationen usw.", 
 					   "2024/10/19 11:55 Fehler behoben, bei dem erzwungene Beendigung nicht gespeichert wird, wenn nichts getan wird.", 
 					   "2024/10/19 15:35 Deutsch zum Protokoll hinzufygen.", 
-					   "2024/10/19 15:45 Aufforderung, deutsche Sprache hinzuzufygen."
+					   "2024/10/19 15:45 Aufforderung, deutsche Sprache hinzuzufygen.", 
+					   "2024/10/19 19:09 Ehndern Sie das Eingabebetriebssystem auf automatische Beurteilung, um Eingabefehler zu vermeiden.", 
+					   "2024/10/19 19:28 Bei Eingabe von \"o\" gefolgt von anderen Befehlen wird der Benutzer aufgefordert, erneut einzugeben.", 
+					   "2024/10/20 17:39 Hilfeinformationen auf Deutsch hinzugefygt."
 					  }};
 string hints[5][110]={{"请问你想读取进度吗(是/否):", 
                        "请按任意键继续...", 
@@ -108,7 +117,8 @@ string hints[5][110]={{"请问你想读取进度吗(是/否):",
                        "保存完毕。", 
                        "游戏结束", 
                        "切换完毕，当前语言:中文", 
-                       "以北京时间为准。"
+                       "以北京时间为准。", 
+                       "请重新输入。"
                       }, 
                       {"May I ask if you would like to read the progress (yes/no):", 
                        "Please press any key to continue...", 
@@ -121,7 +131,8 @@ string hints[5][110]={{"请问你想读取进度吗(是/否):",
                        "Save completed.", 
                        "Game Over", 
                        "Switching completed, current language:English", 
-                       "According to Beijing time."
+                       "According to Beijing time.", 
+                       "Please input again."
                       }, 
 					  {"Darf ich Sie fragen, ob Sie den Fortschritt lesen mvorchten (ja/nein):", 
 					   "Bitte drycken Sie eine beliebige Taste, um fortzufahren...", 
@@ -143,7 +154,7 @@ vector<string> help[5]={{"                           帮助                       
 					     "    方向键下        向下", 
 					     "    方向键左        向左", 
 					     "    方向键右        向右", 
-					     "    ESC             退出", 
+					     "    esc键           退出", 
 					  	 "", 
 					  	 "Windows系统:",
 					  	 "    w               向上", 
@@ -155,7 +166,7 @@ vector<string> help[5]={{"                           帮助                       
 					  	 "o                   显示其他信息", 
 					  	 "    log             输出日志", 
 					  	 "    clear           清空地图", 
-					  	 "    save            保存", 
+					  	 "    save            保存地图", 
 					  	 "    status          显示各种状态所代表的意思", 
 					  	 "    language        切换语言", 
 					  	 "    help            显示此帮助信息"
@@ -163,14 +174,14 @@ vector<string> help[5]={{"                           帮助                       
 					 {
 					  "                                      Help                                        ", 
 					  "----------------------------------------------------------------------------------", 
-					  "Linux System:", 
+					  "Linux system:", 
 					  "    Directional key up           upward", 
 					  "    Directional key down         downward", 
 					  "    Directional key left         towards the left", 
 					  "    Directional key right        towards the right", 
-					  "    ESC                          exit", 
+					  "    esc key                      exit", 
 					  "", 
-					  "Windows System:", 
+					  "Windows system:", 
 					  "    w               upward", 
 					  "    s               downward", 
 					  "    a               towards the left", 
@@ -180,10 +191,34 @@ vector<string> help[5]={{"                           帮助                       
 					  "o                   Display other information", 
 					  "    log             Output Log", 
 					  "    clear           Clear the map", 
-					  "    save            Save", 
+					  "    save            Save the map", 
 					  "    status          Display the meanings represented by various states", 
 					  "    language        Switch language", 
 					  "    help            Display this help information"
+					 }, 
+					 {"                                                          Hilfe                                                             ", 
+					  "----------------------------------------------------------------------------------------------------------------------------", 
+					  "Linux-System:", 
+					  "    Richtungstaste nach oben          nach oben", 
+					  "    Richtungstaste nach unten         nach unten", 
+					  "    Richtungstaste links              nach links", 
+					  "    Richtungstaste rechts             nach rechts", 
+					  "    esc-Taste                         abmelden", 
+					  "", 
+					  "Windows-System:", 
+					  "    w-Tasten                          nach oben", 
+					  "    s-Tasten                          nach unten", 
+					  "    a-Tasten                          nach links", 
+					  "    d-Tasten                          nach rechts", 
+					  "    q-Tasten                          abmelden", 
+					  "", 
+					  "o-Tasten                              Weitere Informationen anzeigen", 
+					  "    log                               Ausgabeprotokoll", 
+					  "    clear                             Karte lvorschen", 
+					  "    save                              Karte speichern", 
+					  "    status                            Anzeigen der Bedeutungen, die durch verschiedene Zustaunde dargestellt werden", 
+					  "    language                          Sprache wechseln", 
+					  "    help                              Diese Hilfe-Informationen anzeigen"
 					 }};
 string yn[5][2]={{"是", "否"}, 
 				 {"yes", "no"}, 
@@ -389,11 +424,62 @@ void set_lang() {
     cin>>language;
     x=lang[language];
 }
+string ask() {
+	string h;
+	cin>>h;
+	if(h=="log") {
+		system(cl);
+		cout<<hints[x][11]<<endl;
+	    for(int i = 0;i<lg[x].size();i++) {
+	        cout<<lg[x][i]<<endl;
+	    }
+	    pause();
+	} else if(h=="clear") {
+	    system(cl);
+	    string op;
+	    cout<<hints[x][6];
+	    cin>>op;
+	    if(op==yn[x][0]) {
+	        for(int i = 1;i<=n;i++) {
+	            for(int j = 1;j<=n;j++) {
+	                ::a[i][j]=0;
+	            }
+	        }
+	        spawn();
+	        spawn();
+	        score=0;
+	        cout<<hints[x][7]<<endl;
+	        pause();
+	        system(cl);
+	    }
+	} else if(h=="save") {
+	    system(cl);
+	    save(gameover);
+	    cout<<hints[x][8]<<endl;
+	    pause();
+	    system(cl);
+	} else if(h=="status") {
+	    system(cl);
+	    mean();
+	    pause();
+	} else if(h=="language") {
+		system(cl);
+		set_lang();
+		cout<<hints[x][10]<<endl;
+		pause();
+	} else if(h=="help") {
+	    system(cl);
+		for(auto i:help[x]) {
+			cout<<i<<endl;
+		}
+		pause();
+	}
+	return h;
+}
 int main() {
     init();
     set_lang();
     ifstream fin("AK-IOI.txt");
-    bool gameover=false;
     n=4;
     if(fin) {
         fin>>gameover;
@@ -422,11 +508,13 @@ int main() {
         spawn();
     }
     gameover=false;
-    string c;
+    string c, w, a, s, d, q;
     int sys;
-    string w, a, s, d, q;
-    cout<<hints[x][2];
-    cin>>sys;
+    #ifdef _WIN32
+    	sys=1;
+    #else
+    	sys=2;
+    #endif
     switch(sys) {
     	case 1:
     		strcpy(cl, "cls");
@@ -435,7 +523,6 @@ int main() {
             pause();
     		break;
     	case 2:
-    	case 3:
     		strcpy(cl, "clear");
     		w="\033[A", s="\033[B", a="\033[D", d="\033[C", q="\033";
     		cout<<hints[x][4]<<endl;
@@ -479,54 +566,15 @@ int main() {
 	    	for(int i = 17;i<=22;i++) {
 	    		cout<<help[x][i].substr(4)<<endl;
 			}
-        	string h;
-        	cin>>h;
-        	if(h=="log") {
-	        	system(cl);
-	        	cout<<hints[x][11]<<endl;
-	            for(int i = 0;i<lg[x].size();i++) {
-	                cout<<lg[x][i]<<endl;
-	            }
-	            pause();
-	        } else if(h=="clear") {
-	            system(cl);
-	            string op;
-	            cout<<hints[x][6];
-	            cin>>op;
-	            if(op==yn[x][0]) {
-	                for(int i = 1;i<=n;i++) {
-	                    for(int j = 1;j<=n;j++) {
-	                        ::a[i][j]=0;
-	                    }
-	                }
-	                spawn();
-	                spawn();
-	                score=0;
-	                cout<<hints[x][7]<<endl;
-	                pause();
-	                system(cl);
-	            }
-	        } else if(h=="save") {
-	            system(cl);
-	            save(gameover);
-	            cout<<hints[x][8]<<endl;
-	            pause();
-	            system(cl);
-	        } else if(h=="status") {
-	            system(cl);
-	            mean();
-	            pause();
-	        } else if(h=="language") {
-	        	system(cl);
-	        	set_lang();
-	        	cout<<hints[x][10]<<endl;
-	        	pause();
-			} else if(h=="help") {
-	            system(cl);
-				for(auto i:help[x]) {
-					cout<<i<<endl;
+			string h;
+			h=ask();
+        	while(h!="log"&&h!="clear"&&h!="save"&&h!="status"&&h!="language"&&h!="help") {
+        		system(cl);
+				cout<<hints[x][12]<<endl;
+		    	for(int i = 17;i<=22;i++) {
+		    		cout<<help[x][i].substr(4)<<endl;
 				}
-				pause();
+				h=ask();
 			}
 		}
         prt();
