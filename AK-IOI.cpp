@@ -8,11 +8,34 @@ map<int, string> color, status, means;
 map<string, int> lang;
 char cl[10];
 long long score;
+string lo, hin, hel;
+ifstream flog, fhints, fhelp;
 #ifdef _WIN32
 	#include<conio.h>
 #else
 	#include<unistd.h>
 	#include<termios.h>
+	char getch() {
+		char buf=0;
+		termios old={0};
+		if(tcgetattr(0, &old)<0) {
+			perror("tcsetattr()");
+		}
+		old.c_lflag&=~ICANON;
+		old.c_lflag&=~ECHO;
+		if(tcsetattr(0, TCSANOW, &old)<0) {
+			perror("tcsetattr ICANON");
+		}
+		if(read(0, &buf, 1)<0) {
+			perror("read()");
+		}
+		old.c_lflag|=ICANON;
+		old.c_lflag|=ECHO;
+		if(tcsetattr(0, TCSANOW, &old)<0) {
+			perror("tcsetattr ~ICANON");
+		}
+		return buf;
+	} 
 #endif
 vector<string> lg[5]={{"                               日志                             ", 
                        "----------------------------------------------------------------", 
@@ -106,6 +129,7 @@ vector<string> lg[5]={{"                               日志                     
 					   "2024/10/19 19:28 Bei Eingabe von \"o\" gefolgt von anderen Befehlen wird der Benutzer aufgefordert, erneut einzugeben.", 
 					   "2024/10/20 17:39 Hilfeinformationen auf Deutsch hinzugefygt."
 					  }};
+/*
 string hints[5][110]={{"请问你想读取进度吗(是/否):", 
                        "请按任意键继续...", 
                        "请输入你的操作系统(1.Windows 2.Mac 3.Linux):", 
@@ -147,6 +171,8 @@ string hints[5][110]={{"请问你想读取进度吗(是/否):",
 					   "Umschalten abgeschlossen, aktuelle Sprache:Deutsch", 
 					   "Nach Pekinger Zeit."
 					  }};
+*/
+string hints[110];
 vector<string> help[5]={{"                           帮助                           ", 
 					     "----------------------------------------------------------", 
 					     "Linux系统:", 
@@ -406,7 +432,7 @@ void save(bool gameover) {
     fout<<score;
 }
 void pause() {
-    cout<<hints[x][1];
+    cout<<hints[1];
     #ifdef _WIN32
     	_getch();
     #else
@@ -419,25 +445,38 @@ void mean() {
     }
 }
 void set_lang() {
-	string language;
+	int cnt=0;
+	string language, tmp;
     cout<<"请输入你的语言/Please enter your language/Bitte geben Sie Ihre Sprache ein(zh/en/de):";
     cin>>language;
     x=lang[language];
+    lo=language+"/"+language+".log";
+    hin=language+"/"+language+".hints";
+    hel=language+"/"+language+".help";
+	flog.open(lo.c_str());
+	fhints.open(hin.c_str());
+	fhelp.open(hel.c_str());
+	while(fhints.peek()!=EOF) {
+		getline(fhints, tmp);
+		hints[cnt++]=tmp;
+	}
 }
 string ask() {
+	string output;
 	string h;
 	cin>>h;
 	if(h=="log") {
 		system(cl);
-		cout<<hints[x][11]<<endl;
-	    for(int i = 0;i<lg[x].size();i++) {
-	        cout<<lg[x][i]<<endl;
+		cout<<hints[11]<<endl;
+	    while(flog.peek()!=EOF) {
+	    	getline(flog, output);
+	        cout<<output<<endl;
 	    }
 	    pause();
 	} else if(h=="clear") {
 	    system(cl);
 	    string op;
-	    cout<<hints[x][6];
+	    cout<<hints[6];
 	    cin>>op;
 	    if(op==yn[x][0]) {
 	        for(int i = 1;i<=n;i++) {
@@ -448,14 +487,14 @@ string ask() {
 	        spawn();
 	        spawn();
 	        score=0;
-	        cout<<hints[x][7]<<endl;
+	        cout<<hints[7]<<endl;
 	        pause();
 	        system(cl);
 	    }
 	} else if(h=="save") {
 	    system(cl);
 	    save(gameover);
-	    cout<<hints[x][8]<<endl;
+	    cout<<hints[8]<<endl;
 	    pause();
 	    system(cl);
 	} else if(h=="status") {
@@ -465,12 +504,13 @@ string ask() {
 	} else if(h=="language") {
 		system(cl);
 		set_lang();
-		cout<<hints[x][10]<<endl;
+		cout<<hints[10]<<endl;
 		pause();
 	} else if(h=="help") {
 	    system(cl);
-		for(auto i:help[x]) {
-			cout<<i<<endl;
+		while(fhelp.peek()!=EOF) {
+			getline(fhelp, output);
+			cout<<output<<endl;
 		}
 		pause();
 	}
@@ -485,7 +525,7 @@ int main() {
         fin>>gameover;
         string op;
         if(!gameover) {
-            cout<<hints[x][0];
+            cout<<hints[0];
             cin>>op;
             if(op==yn[x][0]) {
                 for(int i = 1;i<=n;i++) {
@@ -519,13 +559,13 @@ int main() {
     	case 1:
     		strcpy(cl, "cls");
     		w="w", a="a", s="s", d="d", q="q";
-    		cout<<hints[x][3]<<endl;
+    		cout<<hints[3]<<endl;
             pause();
     		break;
     	case 2:
     		strcpy(cl, "clear");
     		w="\033[A", s="\033[B", a="\033[D", d="\033[C", q="\033";
-    		cout<<hints[x][4]<<endl;
+    		cout<<hints[4]<<endl;
             pause();
             break;
 	}
@@ -536,16 +576,18 @@ int main() {
 	    #ifdef _WIN32
 	    	c=_getch();
 	    #else
-	    	cin>>c;
+	    	c+=getch();
+	    	c+=getch();
+	    	c+=getch();
 	    #endif
         memset(vis, false, sizeof(vis));
         if(c==q) {
             string op;
-            cout<<hints[x][5];
+            cout<<hints[5];
             cin>>op;
             if(op==yn[x][0]) {
                 save(gameover);
-	            cout<<hints[x][8]<<endl;
+	            cout<<hints[8]<<endl;
             }
             pause();
             return 0;
@@ -570,7 +612,7 @@ int main() {
 			h=ask();
         	while(h!="log"&&h!="clear"&&h!="save"&&h!="status"&&h!="language"&&h!="help") {
         		system(cl);
-				cout<<hints[x][12]<<endl;
+				cout<<hints[12]<<endl;
 		    	for(int i = 17;i<=22;i++) {
 		    		cout<<help[x][i].substr(4)<<endl;
 				}
@@ -581,7 +623,7 @@ int main() {
     }
     gameover=true;
     fout<<gameover;
-    cout<<"\033[31m"<<hints[x][9]<<"\033[0m\n";
+    cout<<"\033[31m"<<hints[9]<<"\033[0m\n";
     pause();
     return 0;
 }
