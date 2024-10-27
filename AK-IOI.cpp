@@ -37,215 +37,8 @@ ifstream flog, fhints, fhelp;
 		return buf;
 	} 
 #endif
-vector<string> lg[5]={{"                               日志                             ", 
-                       "----------------------------------------------------------------", 
-                       "2024/10/3 10:42 编写了一个程序UDLR。", 
-                       "2024/10/4 14:05 受此程序启发改编为OIer的2048。", 
-                       "2024/10/4 15:07 编写完毕基本功能。", 
-                       "2024/10/4 18:47 添加随机生成CE的功能。", 
-                       "2024/10/5 13:11 添加历史记录。", 
-                       "2024/10/5 13:27 增加此日志。", 
-                       "2024/10/5 14:32 日志增加英文。", 
-                       "2024/10/5 15:32 增加Gameover的判断逻辑。", 
-                       "2024/10/5 15:51 增加清空地图功能。", 
-                       "2024/10/5 16:11 修复清空后没有方块的bug。", 
-                       "2024/10/5 16:17 增加游玩时保存的功能。", 
-                       "2024/10/7 10:34 所有提示增加英文。", 
-                       "2024/10/7 10:45 更改日志存储逻辑。", 
-                       "2024/10/7 11:21 修复提示输入时是英文, 而实际不是的bug。", 
-                       "2024/10/7 11:37 增加每种状态的意义。", 
-                       "2024/10/7 16:45 更改语言的输入类型。", 
-                       "2024/10/7 16:48 更改输出日志时的操作。", 
-                       "2024/10/7 16:58 添加当强制退出时保存的功能。", 
-                       "2024/10/7 17:12 突出每种状态的意义中其缩写的字母。", 
-                       "2024/10/11 21:35 增加游玩时保存的功能。", 
-                       "2024/10/11 22:06 增加帮助信息。", 
-                       "2024/10/19 11:38 针对Windows用户，增加输入时不用按回车功能。", 
-                       "2024/10/19 11:50 更改日志、帮助信息等输出方式。", 
-                       "2024/10/19 11:55 修复什么也没做时强制退出不会保存的bug。", 
-                       "2024/10/19 15:35 日志增加德语。", 
-                       "2024/10/19 15:45 提示语增加德语。", 
-                       "2024/10/19 19:09 更改输入操作系统改为自动判断，防止输入错误。", 
-                       "2024/10/19 19:28 当输入o后输入其他指令，会让用户重新输入。", 
-                       "2024/10/20 17:39 帮助信息增加德语。"
-                      },
-                      {"                                                    log                                               ", 
-                       "------------------------------------------------------------------------------------------------------", 
-                       "2024/10/3 10:42 Developed a program UDLR.", 
-                       "2024/10/3 14:05 Inspired by this program, it was adapted into OIer's 2048.", 
-                       "2024/10/4 15:07 The basic functions have been written.", 
-                       "2024/10/4 18:47 Added the function of randomly generating CE.", 
-                       "2024/10/5 13:11 Added historical records.", 
-                       "2024/10/5 13:27 Added this log.", 
-                       "2024/10/5 14:32 Added English to the log.", 
-                       "2024/10/5 15:32 Added logic for determining Gameover.", 
-                       "2024/10/5 15:51 Added the function of clearing maps.", 
-                       "2024/10/5 16:11 Fix bug where there are no blocks after clearing.", 
-                       "2024/10/5 16:17 Added the function of saving while playing.", 
-                       "2024/10/7 10:34 All prompts added in English.", 
-                       "2024/10/7 10:45 Change log storage logic.", 
-                       "2024/10/7 11:21 Fix bug where prompt input is in English instead of actual.", 
-                       "2024/10/7 11:37 Add the meaning of each state.", 
-                       "2024/10/7 16:45 Change the input type for the language.", 
-                       "2024/10/7 16:48 Change the operation when output logs.", 
-                       "2024/10/7 16:58 Added the function of saving when forced exit.", 
-                       "2024/10/7 17:12 Highlight the abbreviated letters in the meaning of each state.", 
-                       "2024/10/11 21:35 Added the function of saving while playing.", 
-                       "2024/10/11 22:06 Add help information.", 
-                       "2024/10/19 11:38 For Windows users, add the option to input without pressing Enter.", 
-                       "2024/10/19 11:50 Change the output methods of logs, help information, etc.", 
-                       "2024/10/19 11:55 Fix bug where forced exit does not save when nothing is done.", 
-                       "2024/10/19 15:35 Add German to the log.", 
-                       "2024/10/19 15:45 Add German as a prompt.", 
-                       "2024/10/19 19:09 Change input operating system to automatic judgment to prevent input errors.", 
-                       "2024/10/19 19:28 When entering 'o' followed by other commands, it will prompt the user to re-enter.", 
-                       "2024/10/20 17:39 Help information added in German."
-                      }, 
-					  {"                                                           Journal                                                                    ", 
-					   "--------------------------------------------------------------------------------------------------------------------------------------", 
-					   "2024/10/3 10:42 Entwickelt ein Programm UDLR.", 
-					   "2024/10/3 14:05 Inspiriert von diesem Programm wurde es in OIers 2048 adaptiert.", 
-					   "2024/10/4 15:07 Die Grundfunktionen wurden geschrieben.", 
-					   "2024/10/4 18:47 Hinzugefygt die Funktion der zuaulligen Generierung von CE.", 
-					   "2024/10/5 13:11 Historische Aufzeichnungen wurden hinzugefygt.", 
-					   "2024/10/5 13:27 Dieses Protokoll wurde hinzugefygt.", 
-					   "2024/10/5 14:32 Englisch zum Protokoll hinzugefygt.", 
-					   "2024/10/5 15:32 Logik hinzugefygt, um Gameover zu bestimmen.", 
-					   "2024/10/5 15:51 Die Funktion zum Lvorschen von Karten wurde hinzugefygt.", 
-					   "2024/10/5 16:11 Bug behoben, bei dem es nach dem Lvorschen keine Blvorcke gibt.", 
-					   "2024/10/7 11:37 Fygen Sie die Bedeutung jedes Staates hinzu.", 
-					   "2024/10/7 16:45 Ehndern Sie den Eingabetyp fyr die Sprache.", 
-					   "2024/10/7 16:48 Ehndern Sie den Vorgang, wenn Ausgabeprotokolle ausgegeben werden.", 
-					   "2024/10/7 16:58 Hinzugefygt die Funktion des Speichern beim erzwungenen Beenden.", 
-					   "2024/10/7 17:12 Markieren Sie die abgekyrzten Buchstaben in der Bedeutung jedes Staates.", 
-					   "2024/10/11 21:35 Hinzugefygt die Funktion des Speichern wauhrend des Spiels.", 
-					   "2024/10/11 22:06 Hilfeinformationen hinzufygen.", 
-					   "2024/10/19 11:38 Fyr Windows-Benutzer kvornnen Sie die Option zur Eingabe hinzufygen, ohne die Eingabetaste zu drycken.", 
-					   "2024/10/19 11:50 Ehndern Sie die Ausgabemethoden von Protokollen, Hilfeinformationen usw.", 
-					   "2024/10/19 11:55 Fehler behoben, bei dem erzwungene Beendigung nicht gespeichert wird, wenn nichts getan wird.", 
-					   "2024/10/19 15:35 Deutsch zum Protokoll hinzufygen.", 
-					   "2024/10/19 15:45 Aufforderung, deutsche Sprache hinzuzufygen.", 
-					   "2024/10/19 19:09 Ehndern Sie das Eingabebetriebssystem auf automatische Beurteilung, um Eingabefehler zu vermeiden.", 
-					   "2024/10/19 19:28 Bei Eingabe von \"o\" gefolgt von anderen Befehlen wird der Benutzer aufgefordert, erneut einzugeben.", 
-					   "2024/10/20 17:39 Hilfeinformationen auf Deutsch hinzugefygt."
-					  }};
-/*
-string hints[5][110]={{"请问你想读取进度吗(是/否):", 
-                       "请按任意键继续...", 
-                       "请输入你的操作系统(1.Windows 2.Mac 3.Linux):", 
-                       "请用 w, a, s, d 键游玩, q 键退出。", 
-                       "请用方向键游玩, ESC 键退出。", 
-                       "请问是否要保存进度(是/否):", 
-                       "请问你确定要清空地图吗(是/否):", 
-                       "清空完毕。", 
-                       "保存完毕。", 
-                       "游戏结束", 
-                       "切换完毕，当前语言:中文", 
-                       "以北京时间为准。", 
-                       "请重新输入。"
-                      }, 
-                      {"May I ask if you would like to read the progress (yes/no):", 
-                       "Please press any key to continue...", 
-                       "Please enter your operating system (1. Windows 2. Mac 3. Linux):", 
-                       "Please use the w, a, s, and d keys to play, and the q key to exit.", 
-                       "Please use the directional keys to play and the ESC key to exit.", 
-                       "May I ask if you want to save the progress (yes/no):", 
-                       "Are you sure you want to clear the map? (yes/no):", 
-                       "Clearing completed.", 
-                       "Save completed.", 
-                       "Game Over", 
-                       "Switching completed, current language:English", 
-                       "According to Beijing time.", 
-                       "Please input again."
-                      }, 
-					  {"Darf ich Sie fragen, ob Sie den Fortschritt lesen mvorchten (ja/nein):", 
-					   "Bitte drycken Sie eine beliebige Taste, um fortzufahren...", 
-					   "Bitte geben Sie Ihr Betriebssystem ein (1. Windows 2. Mac 3. Linux):", 
-					   "Bitte verwenden Sie die w-, a-, s- und d-Tasten zum Spielen und die q-Taste zum Beenden.", 
-					   "Bitte verwenden Sie die Richtungstasten zum Spielen und die ESC-Taste zum Beenden.", 
-					   "Darf ich fragen, ob Sie den Fortschritt speichern mvorchten (ja/nein):", 
-					   "Bist du sicher, dass du die Karte lvorschen willstvor (ja/nein):", 
-					   "Clearing abgeschlossen.", 
-					   "Speichern abgeschlossen.", 
-					   "Spiel vorbei", 
-					   "Umschalten abgeschlossen, aktuelle Sprache:Deutsch", 
-					   "Nach Pekinger Zeit."
-					  }};
-*/
 string hints[110];
-vector<string> help[5]={{"                           帮助                           ", 
-					     "----------------------------------------------------------", 
-					     "Linux系统:", 
-					     "    方向键上        向上", 
-					     "    方向键下        向下", 
-					     "    方向键左        向左", 
-					     "    方向键右        向右", 
-					     "    esc键           退出", 
-					  	 "", 
-					  	 "Windows系统:",
-					  	 "    w               向上", 
-					  	 "    s               向下", 
-					  	 "    a               向左", 
-					  	 "    d               向右", 
-					  	 "    q               退出", 
-					  	 "", 
-					  	 "o                   显示其他信息", 
-					  	 "    log             输出日志", 
-					  	 "    clear           清空地图", 
-					  	 "    save            保存地图", 
-					  	 "    status          显示各种状态所代表的意思", 
-					  	 "    language        切换语言", 
-					  	 "    help            显示此帮助信息"
-					 }, 
-					 {
-					  "                                      Help                                        ", 
-					  "----------------------------------------------------------------------------------", 
-					  "Linux system:", 
-					  "    Directional key up           upward", 
-					  "    Directional key down         downward", 
-					  "    Directional key left         towards the left", 
-					  "    Directional key right        towards the right", 
-					  "    esc key                      exit", 
-					  "", 
-					  "Windows system:", 
-					  "    w               upward", 
-					  "    s               downward", 
-					  "    a               towards the left", 
-					  "    d               towards the right", 
-					  "    q               exit", 
-					  "", 
-					  "o                   Display other information", 
-					  "    log             Output Log", 
-					  "    clear           Clear the map", 
-					  "    save            Save the map", 
-					  "    status          Display the meanings represented by various states", 
-					  "    language        Switch language", 
-					  "    help            Display this help information"
-					 }, 
-					 {"                                                          Hilfe                                                             ", 
-					  "----------------------------------------------------------------------------------------------------------------------------", 
-					  "Linux-System:", 
-					  "    Richtungstaste nach oben          nach oben", 
-					  "    Richtungstaste nach unten         nach unten", 
-					  "    Richtungstaste links              nach links", 
-					  "    Richtungstaste rechts             nach rechts", 
-					  "    esc-Taste                         abmelden", 
-					  "", 
-					  "Windows-System:", 
-					  "    w-Tasten                          nach oben", 
-					  "    s-Tasten                          nach unten", 
-					  "    a-Tasten                          nach links", 
-					  "    d-Tasten                          nach rechts", 
-					  "    q-Tasten                          abmelden", 
-					  "", 
-					  "o-Tasten                              Weitere Informationen anzeigen", 
-					  "    log                               Ausgabeprotokoll", 
-					  "    clear                             Karte lvorschen", 
-					  "    save                              Karte speichern", 
-					  "    status                            Anzeigen der Bedeutungen, die durch verschiedene Zustaunde dargestellt werden", 
-					  "    language                          Sprache wechseln", 
-					  "    help                              Diese Hilfe-Informationen anzeigen"
-					 }};
+vector<string> help;
 string yn[5][2]={{"是", "否"}, 
 				 {"yes", "no"}, 
 				 {"ja", "nein"}};
@@ -460,6 +253,11 @@ void set_lang() {
 		getline(fhints, tmp);
 		hints[cnt++]=tmp;
 	}
+	cnt=0;
+	while(fhelp.peek()!=EOF) {
+		getline(fhelp, tmp);
+		help.push_back(tmp);
+	}
 }
 string ask() {
 	string output;
@@ -605,16 +403,16 @@ int main() {
             spawn();
         } else if(c=="o") {
 	    	system(cl);
-	    	for(int i = 17;i<=22;i++) {
-	    		cout<<help[x][i].substr(4)<<endl;
+	    	for(int i = 17;i<help.size();i++) {
+	    		cout<<help[i].substr(4)<<endl;
 			}
 			string h;
 			h=ask();
         	while(h!="log"&&h!="clear"&&h!="save"&&h!="status"&&h!="language"&&h!="help") {
         		system(cl);
 				cout<<hints[12]<<endl;
-		    	for(int i = 17;i<=22;i++) {
-		    		cout<<help[x][i].substr(4)<<endl;
+		    	for(int i = 17;i<help.size();i++) {
+		    		cout<<help[i].substr(4)<<endl;
 				}
 				h=ask();
 			}

@@ -1,0 +1,23 @@
+                                      Help                                        
+----------------------------------------------------------------------------------
+Linux system:
+    Directional key up           upward
+    Directional key down         downward
+    Directional key left         towards the left
+    Directional key right        towards the right
+    esc key                      exit
+
+Windows system:
+    w               upward
+    s               downward
+    a               towards the left
+    d               towards the right
+    q               exit
+
+o                   Display other information
+    log             Output Log
+    clear           Clear the map
+    save            Save the map
+    status          Display the meanings represented by various states
+    language        Switch language
+    help            Display this help information

@@ -1,0 +1,28 @@
+                                                           Journal                                                                    
+--------------------------------------------------------------------------------------------------------------------------------------
+2024/10/3 10:42 Entwickelt ein Programm UDLR.
+2024/10/3 14:05 Inspiriert von diesem Programm wurde es in OIers 2048 adaptiert.
+2024/10/4 15:07 Die Grundfunktionen wurden geschrieben.
+2024/10/4 18:47 Hinzugefygt die Funktion der zuaulligen Generierung von CE.
+2024/10/5 13:11 Historische Aufzeichnungen wurden hinzugefygt.
+2024/10/5 13:27 Dieses Protokoll wurde hinzugefygt.
+2024/10/5 14:32 Englisch zum Protokoll hinzugefygt.
+2024/10/5 15:32 Logik hinzugefygt, um Gameover zu bestimmen.
+2024/10/5 15:51 Die Funktion zum Lvorschen von Karten wurde hinzugefygt.
+2024/10/5 16:11 Bug behoben, bei dem es nach dem Lvorschen keine Blvorcke gibt.
+2024/10/7 11:37 Fygen Sie die Bedeutung jedes Staates hinzu.
+2024/10/7 16:45 Ehndern Sie den Eingabetyp fyr die Sprache.
+2024/10/7 16:48 Ehndern Sie den Vorgang, wenn Ausgabeprotokolle ausgegeben werden.
+2024/10/7 16:58 Hinzugefygt die Funktion des Speichern beim erzwungenen Beenden.
+2024/10/7 17:12 Markieren Sie die abgekyrzten Buchstaben in der Bedeutung jedes Staates.
+2024/10/11 21:35 Hinzugefygt die Funktion des Speichern wauhrend des Spiels.
+2024/10/11 22:06 Hilfeinformationen hinzufygen.
+2024/10/19 11:38 Fyr Windows-Benutzer kvornnen Sie die Option zur Eingabe hinzufygen, ohne die Eingabetaste zu drycken.
+2024/10/19 11:50 Ehndern Sie die Ausgabemethoden von Protokollen, Hilfeinformationen usw.
+2024/10/19 11:55 Fehler behoben, bei dem erzwungene Beendigung nicht gespeichert wird, wenn nichts getan wird.
+2024/10/19 15:35 Deutsch zum Protokoll hinzufygen.
+2024/10/19 15:45 Aufforderung, deutsche Sprache hinzuzufygen.
+2024/10/19 19:09 Ehndern Sie das Eingabebetriebssystem auf automatische Beurteilung, um Eingabefehler zu vermeiden.
+2024/10/19 19:28 Bei Eingabe von "o" gefolgt von anderen Befehlen wird der Benutzer aufgefordert, erneut einzugeben.
+2024/10/20 17:39 Hilfeinformationen auf Deutsch hinzugefygt.
+2024/10/27 20:25 Setzen Sie Protokolle, Hilfeinformationen, Aufforderungen usw. in Dateien statt Code.

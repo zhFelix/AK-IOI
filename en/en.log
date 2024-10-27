@@ -29,3 +29,4 @@
 2024/10/19 19:09 Change input operating system to automatic judgment to prevent input errors.
 2024/10/19 19:28 When entering 'o' followed by other commands, it will prompt the user to re-enter.
 2024/10/20 17:39 Help information added in German.
+2024/10/27 20:26 Put logs, help information, prompts, etc. into files instead of code.
