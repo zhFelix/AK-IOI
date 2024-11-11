@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 #include<random>
 using namespace std;
-int a[110][110], n, x;
+int a[110][110], n, x, baka[110][110];
 map<long long, int> fib;
-bool vis[110][110], gameover;
+bool vis[110][110], gameover, cheat;
 map<int, string> color, status, means;
 map<string, int> lang;
 char cl[10];
@@ -311,8 +311,61 @@ string ask() {
 			cout<<output<<endl;
 		}
 		pause();
+	} else if(h=="cheat") {
+		cheat=!cheat;
 	}
 	return h;
+}
+double exe_score() {
+	double score=0;
+	for(int i = 1;i<=n;i++) {
+		for(int j = 1;j<=n;j++) {
+			if(a[i][j]) {
+				score+=log2(a[i][j]);
+			}
+		}
+	}
+	for(int i = 1;i<=n;i++) {
+		for(int j = 1;j<=n;j++) {
+			if(!a[i][j]) {
+				score+=5;
+			}
+		}
+	}
+	return score;
+}
+int choose() {
+	int bakscore=score, best, maxx=numeric_limits<int>::min();
+	memcpy(baka, a, sizeof(a));
+	up();
+	if(exe_score()>maxx) {
+		maxx=exe_score();
+		best=0;
+	}
+	score=bakscore;
+	memcpy(a, baka, sizeof(baka));
+	down();
+	if(exe_score()>maxx) {
+		maxx=exe_score();
+		best=1;
+	}
+	score=bakscore;
+	memcpy(a, baka, sizeof(baka));
+	left();
+	if(exe_score()>maxx) {
+		maxx=exe_score();
+		best=2;
+	}
+	score=bakscore;
+	memcpy(a, baka, sizeof(baka));
+	right();
+	if(exe_score()>maxx) {
+		maxx=exe_score();
+		best=3;
+	}
+	score=bakscore;
+	memcpy(a, baka, sizeof(baka));
+	return best;
 }
 int main() {
     init();
@@ -371,51 +424,104 @@ int main() {
     ofstream fout("AK-IOI.txt");
     while(chk()) {
         save(false);
-	    #ifdef _WIN32
-	    	c=_getch();
-	    #else
-	    	c+=getch();
-	    	c+=getch();
-	    	c+=getch();
-	    #endif
         memset(vis, false, sizeof(vis));
-        if(c==q) {
-            string op;
-            cout<<hints[5];
-            cin>>op;
-            if(op==yn[x][0]) {
-                save(gameover);
-	            cout<<hints[8]<<endl;
-            }
-            pause();
-            return 0;
-        } else if(c==w) {
-            up();
-            spawn();
-        } else if(c==s) {
-            down();
-            spawn();
-        } else if(c==a) {
-            left();
-            spawn();
-        } else if(c==d) {
-            right();
-            spawn();
-        } else if(c=="o") {
-	    	system(cl);
-	    	for(int i = 17;i<help.size();i++) {
-	    		cout<<help[i].substr(4)<<endl;
-			}
-			string h;
-			h=ask();
-        	while(h!="log"&&h!="clear"&&h!="save"&&h!="status"&&h!="language"&&h!="help") {
-        		system(cl);
-				cout<<hints[12]<<endl;
+        if(!cheat) {
+		    #ifdef _WIN32
+		    	c=_getch();
+		    #else
+		    	c+=getch();
+		    	c+=getch();
+		    	c+=getch();
+		    #endif
+        	if(c==q) {
+	            string op;
+	            cout<<hints[5];
+	            cin>>op;
+	            if(op==yn[x][0]) {
+	                save(gameover);
+		            cout<<hints[8]<<endl;
+	            }
+	            pause();
+	            return 0;
+	        } else if(c==w) {
+	            up();
+	            spawn();
+	        } else if(c==s) {
+	            down();
+	            spawn();
+	        } else if(c==a) {
+	            left();
+	            spawn();
+	        } else if(c==d) {
+	            right();
+	            spawn();
+	        } else if(c=="o") {
+		    	system(cl);
 		    	for(int i = 17;i<help.size();i++) {
 		    		cout<<help[i].substr(4)<<endl;
 				}
+				string h;
 				h=ask();
+	        	while(h!="log"&&h!="clear"&&h!="save"&&h!="status"&&h!="language"&&h!="help"&&h!="cheat") {
+	        		system(cl);
+					cout<<hints[12]<<endl;
+			    	for(int i = 17;i<help.size();i++) {
+			    		cout<<help[i].substr(4)<<endl;
+					}
+					h=ask();
+				}
 			}
+		} else {
+			int chose=choose();
+			if(chose==0) {
+	            up();
+	            spawn();
+	        } else if(chose==1) {
+	            down();
+	            spawn();
+	        } else if(chose==2) {
+	            left();
+	            spawn();
+	        } else if(chose==3) {
+	            right();
+	            spawn();
+	        }
+			if(kbhit()){
+			    #ifdef _WIN32
+			    	c=_getch();
+			    #else
+			    	c+=getch();
+			    	c+=getch();
+			    	c+=getch();
+			    #endif
+				if(c==q) {
+		            string op;
+		            cout<<hints[5];
+		            cin>>op;
+		            if(op==yn[x][0]) {
+		                save(gameover);
+			            cout<<hints[8]<<endl;
+		            }
+		            pause();
+		            return 0;
+		        } else if(c=="o") {
+			    	system(cl);
+			    	for(int i = 17;i<help.size();i++) {
+			    		cout<<help[i].substr(4)<<endl;
+					}
+					string h;
+					h=ask();
+		        	while(h!="log"&&h!="clear"&&h!="save"&&h!="status"&&h!="language"&&h!="help"&&h!="cheat") {
+		        		system(cl);
+						cout<<hints[12]<<endl;
+				    	for(int i = 17;i<help.size();i++) {
+				    		cout<<help[i].substr(4)<<endl;
+						}
+						h=ask();
+					}
+				}
+			}
+			this_thread::sleep_for(chrono::milliseconds(500));
 		}
         prt();
     }
