@@ -1,4 +1,6 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<fstream>
+#include<map>
 #include<random>
 using namespace std;
 int a[110][110], n, x;
@@ -39,7 +41,7 @@ ifstream flog, fhints, fhelp;
 #endif
 string hints[110];
 vector<string> help;
-string yn[5][2]={{"ÊÇ", "·ñ"}, 
+string yn[5][2]={{"ï¿½ï¿½", "ï¿½ï¿½"}, 
 				 {"yes", "no"}, 
 				 {"ja", "nein"}};
 void init() {
@@ -224,7 +226,7 @@ void save(bool gameover) {
     }
     fout<<score;
 }
-void pause() {
+void pse() {
     cout<<hints[1];
     #ifdef _WIN32
     	_getch();
@@ -240,7 +242,7 @@ void mean() {
 void set_lang() {
 	int cnt=0;
 	string language, tmp;
-    cout<<"ÇëÊäÈëÄãµÄÓïÑÔ/Please enter your language/Bitte geben Sie Ihre Sprache ein(zh/en/de):";
+    cout<<"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?/Please enter your language/Bitte geben Sie Ihre Sprache ein(zh/en/de):";
     cin>>language;
     x=lang[language];
     lo=language+"/"+language+".log";
@@ -270,7 +272,7 @@ string ask() {
 	    	getline(flog, output);
 	        cout<<output<<endl;
 	    }
-	    pause();
+	    pse();
 	} else if(h=="clear") {
 	    system(cl);
 	    string op;
@@ -286,31 +288,31 @@ string ask() {
 	        spawn();
 	        score=0;
 	        cout<<hints[7]<<endl;
-	        pause();
+	        pse();
 	        system(cl);
 	    }
 	} else if(h=="save") {
 	    system(cl);
 	    save(gameover);
 	    cout<<hints[8]<<endl;
-	    pause();
+	    pse();
 	    system(cl);
 	} else if(h=="status") {
 	    system(cl);
 	    mean();
-	    pause();
+	    pse();
 	} else if(h=="language") {
 		system(cl);
 		set_lang();
 		cout<<hints[10]<<endl;
-		pause();
+		pse();
 	} else if(h=="help") {
 	    system(cl);
 		while(fhelp.peek()!=EOF) {
 			getline(fhelp, output);
 			cout<<output<<endl;
 		}
-		pause();
+		pse();
 	}
 	return h;
 }
@@ -358,13 +360,13 @@ int main() {
     		strcpy(cl, "cls");
     		w="w", a="a", s="s", d="d", q="q";
     		cout<<hints[3]<<endl;
-            pause();
+            pse();
     		break;
     	case 2:
     		strcpy(cl, "clear");
     		w="\033[A", s="\033[B", a="\033[D", d="\033[C", q="\033";
     		cout<<hints[4]<<endl;
-            pause();
+            pse();
             break;
 	}
     prt();
@@ -387,7 +389,7 @@ int main() {
                 save(gameover);
 	            cout<<hints[8]<<endl;
             }
-            pause();
+            pse();
             return 0;
         } else if(c==w) {
             up();
@@ -422,6 +424,6 @@ int main() {
     gameover=true;
     fout<<gameover;
     cout<<"\033[31m"<<hints[9]<<"\033[0m\n";
-    pause();
+    pse();
     return 0;
 }
